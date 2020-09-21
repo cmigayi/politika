@@ -12,6 +12,7 @@ public class PlayerLocalProfile {
 
     public static final String PLAYER_ID = "player_id";
     public static final String NAME = "name";
+    public static final String LAST_SCENE = "last_scene";
     public static final String DATETIME = "date_time";
 
     public PlayerLocalProfile(Context context) {
@@ -19,9 +20,10 @@ public class PlayerLocalProfile {
         editor = localProfile.edit();
     }
 
-    public void storePlayer(Player player){
+    public void createPlayer(Player player){
         editor.putInt(PLAYER_ID, player.getId());
         editor.putString(NAME, player.getName());
+        editor.putInt(LAST_SCENE, player.getLastSceneId());
         editor.putString(DATETIME, player.getDateTime());
         editor.commit();
     }
@@ -32,6 +34,7 @@ public class PlayerLocalProfile {
                 localProfile.getString(NAME, ""),
                 localProfile.getString(DATETIME, "")
         );
+        player.setLastSceneId(localProfile.getInt(LAST_SCENE, -1));
         return player;
     }
 

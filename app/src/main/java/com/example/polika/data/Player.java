@@ -13,6 +13,8 @@ public class Player {
     @ColumnInfo(name = "name")
     String name;
 
+    int lastSceneId;
+
     @ColumnInfo(name = "date_time")
     String dateTime;
 
@@ -40,6 +42,14 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getLastSceneId() {
+        return lastSceneId;
+    }
+
+    public void setLastSceneId(int lastSceneId) {
+        this.lastSceneId = lastSceneId;
     }
 
     public String getDateTime() {

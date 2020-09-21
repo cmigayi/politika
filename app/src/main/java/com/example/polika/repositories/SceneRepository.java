@@ -11,6 +11,7 @@ public interface SceneRepository {
     }
 
     public void createScene(Scene scene, OnFinishedListener onFinishedListener);
+    public void createSceneByList(List<Scene> sceneList, OnFinishedListener onFinishedListener);
     public void getScenes(OnFinishedListener onFinishedListener);
     public void getScene(int sceneId, OnFinishedListener onFinishedListener);
 }

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "scenes")
 public class Scene {
     @PrimaryKey(autoGenerate = true)
-    int sceneId;
+    int id;
 
     @ColumnInfo(name = "scene_content_id")
     int sceneContentId;
@@ -19,8 +19,8 @@ public class Scene {
     @ColumnInfo(name = "date_time")
     String dateTime;
 
-    public Scene(int sceneId, int sceneContentId, int sceneOrder, String dateTime) {
-        this.sceneId = sceneId;
+    public Scene(int id, int sceneContentId, int sceneOrder, String dateTime) {
+        this.id = id;
         this.sceneContentId = sceneContentId;
         this.sceneOrder = sceneOrder;
         this.dateTime = dateTime;
@@ -30,12 +30,12 @@ public class Scene {
     public Scene() {
     }
 
-    public int getSceneId() {
-        return sceneId;
+    public int getId() {
+        return id;
     }
 
-    public void setSceneId(int sceneId) {
-        this.sceneId = sceneId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSceneContentId() {
@@ -65,7 +65,7 @@ public class Scene {
     @Override
     public String toString() {
         return "Scene{" +
-                "sceneId=" + sceneId +
+                "id=" + id +
                 ", sceneContentId=" + sceneContentId +
                 ", sceneOrder=" + sceneOrder +
                 ", dateTime='" + dateTime + '\'' +

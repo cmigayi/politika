@@ -15,6 +15,20 @@ public class MainActivityPresenter {
         this.view = view;
     }
 
+    public void createPlayer(Player player){
+        repository.createPlayer(player, new PlayerRepository.OnFinishedListener() {
+            @Override
+            public void onFinished(List<Player> playerList) {
+
+            }
+
+            @Override
+            public void onFailuire(Object response) {
+
+            }
+        });
+    }
+
     public void loadPlayers(){
         repository.getPlayers(new PlayerRepository.OnFinishedListener() {
             @Override
