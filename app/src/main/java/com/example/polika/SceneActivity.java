@@ -43,7 +43,7 @@ public class SceneActivity extends AppCompatActivity implements SceneActivityVie
 
     @Override
     public void initSceneContent(Scene scene) {
-        Log.d(mSceneActivity, "Scene order: "+scene.getSceneOrder());
+        Log.d(mSceneActivity, "Scene order: "+scene.getSceneRank());
     }
 
     @Override

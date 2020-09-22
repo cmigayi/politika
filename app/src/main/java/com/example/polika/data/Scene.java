@@ -10,19 +10,19 @@ public class Scene {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    @ColumnInfo(name = "scene_content_id")
-    int sceneContentId;
+    @ColumnInfo(name = "name")
+    String name;
 
-    @ColumnInfo(name = "scene_order")
-    int sceneOrder;
+    @ColumnInfo(name = "scene_rank")
+    int sceneRank;
 
     @ColumnInfo(name = "date_time")
     String dateTime;
 
-    public Scene(int id, int sceneContentId, int sceneOrder, String dateTime) {
+    public Scene(int id, String name, int sceneRank, String dateTime) {
         this.id = id;
-        this.sceneContentId = sceneContentId;
-        this.sceneOrder = sceneOrder;
+        this.name = name;
+        this.sceneRank = sceneRank;
         this.dateTime = dateTime;
     }
 
@@ -38,20 +38,20 @@ public class Scene {
         this.id = id;
     }
 
-    public int getSceneContentId() {
-        return sceneContentId;
+    public String getName() {
+        return name;
     }
 
-    public void setSceneContentId(int sceneContentId) {
-        this.sceneContentId = sceneContentId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getSceneOrder() {
-        return sceneOrder;
+    public int getSceneRank() {
+        return sceneRank;
     }
 
-    public void setSceneOrder(int sceneOrder) {
-        this.sceneOrder = sceneOrder;
+    public void setSceneRank(int sceneRank) {
+        this.sceneRank = sceneRank;
     }
 
     public String getDateTime() {
@@ -66,8 +66,8 @@ public class Scene {
     public String toString() {
         return "Scene{" +
                 "id=" + id +
-                ", sceneContentId=" + sceneContentId +
-                ", sceneOrder=" + sceneOrder +
+                ", name =" + name +
+                ", sceneRank=" + sceneRank +
                 ", dateTime='" + dateTime + '\'' +
                 '}';
     }

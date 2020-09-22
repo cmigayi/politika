@@ -1,6 +1,5 @@
 package com.example.polika.repositories;
 
-import com.example.polika.data.Scene;
 import com.example.polika.data.SceneContent;
 
 import java.util.List;

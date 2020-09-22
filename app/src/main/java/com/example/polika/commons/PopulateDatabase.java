@@ -16,7 +16,6 @@ public class PopulateDatabase {
 
     public PopulateDatabase(Context context) {
         sceneLocalDb = new SceneLocalDb(context);
-
         populateScenes();
     }
 

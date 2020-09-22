@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.polika.data.Player;
-
 import java.util.List;
 
 @Dao

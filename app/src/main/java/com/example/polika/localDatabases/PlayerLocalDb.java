@@ -2,7 +2,6 @@ package com.example.polika.localDatabases;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.example.polika.daoDatabases.PlayerDaoDatabase;
 import com.example.polika.data.Player;
 import com.example.polika.repositories.PlayerRepository;

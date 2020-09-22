@@ -10,24 +10,28 @@ public class SceneContent {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    @ColumnInfo(name = "subcontent_id")
-    int subcontentId;
+    @ColumnInfo(name = "scene_id")
+    int sceneId;
 
-    @ColumnInfo(name = "content_order")
-    int contentOrder;
+    @ColumnInfo(name = "content_type")
+    int contentType;
+
+    @ColumnInfo(name = "content")
+    int content;
+
+    @ColumnInfo(name = "content_rank")
+    int contentRank;
 
     @ColumnInfo(name = "date_time")
     String dateTime;
 
-    public SceneContent(int id, int subcontentId, int contentOrder, String dateTime) {
+    public SceneContent(int id, int sceneId, int contentType, int content, int contentRank, String dateTime) {
         this.id = id;
-        this.subcontentId = subcontentId;
-        this.contentOrder = contentOrder;
+        this.sceneId = sceneId;
+        this.contentType = contentType;
+        this.content = content;
+        this.contentRank = contentRank;
         this.dateTime = dateTime;
-    }
-
-    @Ignore
-    public SceneContent() {
     }
 
     public int getId() {
@@ -38,20 +42,36 @@ public class SceneContent {
         this.id = id;
     }
 
-    public int getSubcontentId() {
-        return subcontentId;
+    public int getSceneId() {
+        return sceneId;
     }
 
-    public void setSubcontentId(int subcontentId) {
-        this.subcontentId = subcontentId;
+    public void setSceneId(int sceneId) {
+        this.sceneId = sceneId;
     }
 
-    public int getContentOrder() {
-        return contentOrder;
+    public int getContentType() {
+        return contentType;
     }
 
-    public void setContentOrder(int contentOrder) {
-        this.contentOrder = contentOrder;
+    public void setContentType(int contentType) {
+        this.contentType = contentType;
+    }
+
+    public int getContent() {
+        return content;
+    }
+
+    public void setContent(int content) {
+        this.content = content;
+    }
+
+    public int getContentRank() {
+        return contentRank;
+    }
+
+    public void setContentRank(int contentRank) {
+        this.contentRank = contentRank;
     }
 
     public String getDateTime() {
@@ -66,8 +86,10 @@ public class SceneContent {
     public String toString() {
         return "SceneContent{" +
                 "id=" + id +
-                ", subcontentId=" + subcontentId +
-                ", contentOrder=" + contentOrder +
+                ", sceneId=" + sceneId +
+                ", contentType=" + contentType +
+                ", content=" + content +
+                ", contentRank=" + contentRank +
                 ", dateTime='" + dateTime + '\'' +
                 '}';
     }
