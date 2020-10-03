@@ -1,5 +1,9 @@
 package com.example.polika.daos;
 
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+
 import com.example.polika.data.Scene;
 import com.example.polika.data.SceneContent;
 
@@ -17,7 +21,7 @@ public interface SceneContentDao {
     public List<Long> insertSceneContentList(List<SceneContent> sceneContentList);
 
     @Insert
-    public Long insertSceneContent(SceneContent... sceneContent);
+    public Long insertSceneContent(SceneContent sceneContent);
 
     @Query("SELECT * FROM scene_contents ORDER BY id DESC LIMIT 1")
     public List<SceneContent> getLastInsertedSceneContent();

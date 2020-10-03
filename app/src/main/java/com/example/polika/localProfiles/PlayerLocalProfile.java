@@ -21,6 +21,8 @@ public class PlayerLocalProfile {
     }
 
     public void createPlayer(Player player){
+        clearPlayerData();
+
         editor.putInt(PLAYER_ID, player.getId());
         editor.putString(NAME, player.getName());
         editor.putInt(LAST_SCENE, player.getLastSceneId());

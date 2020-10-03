@@ -1,5 +1,8 @@
 package com.example.polika.presenters;
 
+import android.util.Log;
+
+import com.example.polika.commons.AppExecutors;
 import com.example.polika.data.Player;
 import com.example.polika.data.Scene;
 import com.example.polika.repositories.SceneRepository;
@@ -8,6 +11,7 @@ import com.example.polika.views.SceneActivityView;
 import java.util.List;
 
 public class SceneActivityPresenter {
+    final static String mSceneActivityPresenter = "SceneActivityPresenter";
     SceneRepository repository;
     SceneActivityView view;
 
@@ -24,7 +28,7 @@ public class SceneActivityPresenter {
             }
 
             @Override
-            public void onFailuire(Object response) {
+            public void onFailuire(Throwable t) {
 
             }
         });
@@ -38,42 +42,33 @@ public class SceneActivityPresenter {
            }
 
            @Override
-           public void onFailuire(Object response) {
+           public void onFailuire(Throwable t) {
 
            }
        });
     }
 
-    public void getScenes(final Player player){
+    public void getScenes(){
         repository.getScenes(new SceneRepository.OnFinishedListener() {
             @Override
             public void onFinished(List<Scene> sceneList) {
-
-                repository.getScene(player.getLastSceneId(), new SceneRepository.OnFinishedListener() {
+                Log.d(mSceneActivityPresenter, "Scenes: "+sceneList);
+                AppExecutors.getInstance().mainThread().execute(new Runnable() {
                     @Override
-                    public void onFinished(List<Scene> sceneList) {
-                        Scene lastScene = sceneList.get(0);
-
-                        for(int i=0; i>sceneList.size();i++){
-                            Scene nextScene = sceneList.get(i);
-                            if(nextScene.getSceneOrder() > lastScene.getSceneOrder()){
-                                view.initSceneContent(nextScene);
-                            }else{
-                                // None
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailuire(Object response) {
-                        view.displayError("Error");
+                    public void run() {
+                       view.loadedScenes(sceneList);
                     }
                 });
             }
 
             @Override
-            public void onFailuire(Object response) {
-                view.displayError("Error");
+            public void onFailuire(Throwable t) {
+                AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.displayError("Error");
+                    }
+                });
             }
         });
     }

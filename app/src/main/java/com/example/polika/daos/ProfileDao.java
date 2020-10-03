@@ -1,5 +1,9 @@
 package com.example.polika.daos;
 
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+
 import com.example.polika.data.Profile;
 import java.util.List;
 

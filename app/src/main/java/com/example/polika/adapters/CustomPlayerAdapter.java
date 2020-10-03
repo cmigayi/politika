@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.polika.R;
 import com.example.polika.data.Player;
+import com.example.polika.databinding.CustomPlayerRecyclerviewItemBinding;
 
 import java.util.List;
 
@@ -29,12 +32,16 @@ public class CustomPlayerAdapter extends RecyclerView.Adapter<CustomPlayerAdapte
     @NonNull
     @Override
     public CustomPlayerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        CustomPlayerRecyclerviewItemBinding binding = DataBindingUtil.inflate(
+                layoutInflater, R.layout.custom_player_recyclerview_item, parent, false
+        );
+        ViewHolder viewHolder = new ViewHolder(binding, onPlayerListener);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomPlayerAdapter.ViewHolder holder, int position) {
-
+        holder.binding.setPlayer(playerList.get(position));
     }
 
     @Override
@@ -43,10 +50,15 @@ public class CustomPlayerAdapter extends RecyclerView.Adapter<CustomPlayerAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        CustomPlayerRecyclerviewItemBinding binding;
         OnPlayerListener onPlayerListener;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(CustomPlayerRecyclerviewItemBinding itemView, OnPlayerListener onPlayerListener) {
+            super(itemView.getRoot());
+            binding = itemView;
+            this.onPlayerListener = onPlayerListener;
+
+            binding.getRoot().setOnClickListener(this);
         }
 
         @Override

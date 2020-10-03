@@ -2,6 +2,8 @@ package com.example.polika.localDatabases;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.polika.commons.AppExecutors;
 import com.example.polika.daoDatabases.SceneDaoDatabase;
 import com.example.polika.data.Scene;
 import com.example.polika.repositories.SceneRepository;
@@ -31,26 +33,35 @@ public class SceneLocalDb implements SceneRepository {
     }
 
     @Override
-    public void createSceneByList(List<Scene> sceneList, OnFinishedListener onFinishedListener) {
-        try {
-            List<Long> statusList = sceneDaoDatabase.sceneDao().insertSceneList(sceneList);
-            if (statusList.size() == sceneList.size() ) {
-                onFinishedListener.onFinished(sceneList);
-                Log.d(mSceneLocalDb, "Success01: " + sceneList.get(0).getId());
+    public void createSceneByList(final List<Scene> sceneList, final OnFinishedListener onFinishedListener) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Long> statusList = sceneDaoDatabase.sceneDao().insertSceneList(sceneList);
+                    onFinishedListener.onFinished(sceneList);
+                    Log.d(mSceneLocalDb, "Success01: " + statusList);
+                }catch (Exception e){
+                    onFinishedListener.onFailuire(e);
+                }
             }
-        }catch (Exception e){
-            onFinishedListener.onFailuire(e);
-        }
+        });
     }
 
     @Override
     public void getScenes(OnFinishedListener onFinishedListener) {
-        try {
-            List<Scene> sceneList = sceneDaoDatabase.sceneDao().getScenes();
-            onFinishedListener.onFinished(sceneList);
-        }catch (Exception e){
-            onFinishedListener.onFailuire(e);
-        }
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Scene> sceneList = sceneDaoDatabase.sceneDao().getScenes();
+                    Log.d(mSceneLocalDb, "Success01: " + sceneList);
+                    onFinishedListener.onFinished(sceneList);
+                }catch (Exception e){
+                    onFinishedListener.onFailuire(e);
+                }
+            }
+        });
     }
 
     @Override

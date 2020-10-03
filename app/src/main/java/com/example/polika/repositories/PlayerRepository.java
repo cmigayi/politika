@@ -7,7 +7,7 @@ import java.util.List;
 public interface PlayerRepository {
     public interface OnFinishedListener{
         void onFinished(List<Player> playerList);
-        void onFailuire(Object response);
+        void onFailuire(Throwable t);
     }
 
     public void createPlayer(Player player, OnFinishedListener onFinishedListener);

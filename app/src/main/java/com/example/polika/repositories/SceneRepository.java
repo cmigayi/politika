@@ -7,7 +7,7 @@ import java.util.List;
 public interface SceneRepository {
     public interface OnFinishedListener{
         void onFinished(List<Scene> sceneList);
-        void onFailuire(Object response);
+        void onFailuire(Throwable t);
     }
 
     public void createScene(Scene scene, OnFinishedListener onFinishedListener);

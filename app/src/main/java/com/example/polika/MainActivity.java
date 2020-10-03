@@ -6,7 +6,9 @@ import android.os.Bundle;
 import com.example.polika.adapters.CustomPlayerAdapter;
 import com.example.polika.data.Player;
 import com.example.polika.localDatabases.PlayerLocalDb;
+import com.example.polika.localDatabases.SceneLocalDb;
 import com.example.polika.localProfiles.PlayerLocalProfile;
+import com.example.polika.preload.PopulateScene;
 import com.example.polika.presenters.MainActivityPresenter;
 import com.example.polika.views.MainActivityView;
 
@@ -22,6 +24,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     Intent intent;
 
+    List<Player> loadedPlayerList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity
 
         playerLocalProfile = new PlayerLocalProfile(this);
 
+        new PopulateScene(new SceneLocalDb(this)).insertData();
+
         PlayerLocalDb playerLocalDb = new PlayerLocalDb(this);
         presenter = new MainActivityPresenter(playerLocalDb, this);
         presenter.loadPlayers();
@@ -56,8 +64,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void loadPlayers(List<Player> playerList) {
+    public void loadedPlayers(List<Player> playerList) {
         Log.d(mMainActivity, "Players:"+ playerList);
+        loadedPlayerList = playerList;
+
         if(playerList.size() > 0){
             playerlistRv.setHasFixedSize(true);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -88,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         player.setLastSceneId(0);
 
         // Create new player profile
-        playerLocalProfile.createPlayer(player);
+        //playerLocalProfile.createPlayer(player);
 
         // Reload players list
         presenter.loadPlayers();
@@ -132,6 +142,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPlayerListenerClick(int position) {
         intent = new Intent(this, SceneActivity.class);
-        startActivity(intent);
+        playerLocalProfile.createPlayer(loadedPlayerList.get(position));
+        if(playerLocalProfile.isPlayer()){
+            startActivity(intent);
+        }
     }
 }
