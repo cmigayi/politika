@@ -2,6 +2,8 @@ package com.example.polika.localDatabases;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.polika.commons.AppExecutors;
 import com.example.polika.daoDatabases.SceneContentDaoDatabase;
 import com.example.polika.data.SceneContent;
 import com.example.polika.repositories.SceneContentRepository;
@@ -31,24 +33,48 @@ public class SceneContentLocalDb implements SceneContentRepository {
     }
 
     @Override
+    public void createSceneContentByList(List<SceneContent> sceneContentList, OnFinishedListener onFinishedListener) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Long> statusList = sceneContentDaoDatabase.sceneContentDao()
+                            .insertSceneContentList(sceneContentList);
+                    onFinishedListener.onFinished(sceneContentList);
+                    Log.d(mSceneContentDb, "Success01: " + statusList);
+                }catch (Exception e){
+                    onFinishedListener.onFailuire(e);
+                }
+            }
+        });
+    }
+
+    @Override
     public void getSceneContents(OnFinishedListener onFinishedListener) {
         try {
             List<SceneContent> sceneContentList =
                     sceneContentDaoDatabase.sceneContentDao().getSceneContents();
             onFinishedListener.onFinished(sceneContentList);
+            Log.d(mSceneContentDb, "Success01: " + sceneContentList);
         }catch (Exception e){
             onFinishedListener.onFailuire(e);
         }
     }
 
     @Override
-    public void getSceneContent(int sceneContentId, OnFinishedListener onFinishedListener) {
-        try {
-            List<SceneContent> sceneContentList =
-                    sceneContentDaoDatabase.sceneContentDao().getSceneContent(sceneContentId);
-            onFinishedListener.onFinished(sceneContentList);
-        }catch (Exception e){
-            onFinishedListener.onFailuire(e);
-        }
+    public void getSceneContent(int sceneId, OnFinishedListener onFinishedListener) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<SceneContent> sceneContentList =
+                            sceneContentDaoDatabase.sceneContentDao().getSceneContent(sceneId);
+                    onFinishedListener.onFinished(sceneContentList);
+                    Log.d(mSceneContentDb, "Success012: " + sceneContentList);
+                }catch (Exception e){
+                    onFinishedListener.onFailuire(e);
+                }
+            }
+        });
     }
 }

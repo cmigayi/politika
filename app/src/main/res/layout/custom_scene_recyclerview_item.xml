@@ -17,11 +17,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
-            android:textSize="16sp"
-            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="@{scene.name}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/rank_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:text="@{`Rank: `+scene.sceneRank}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scene_tv"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,7 +17,7 @@ public class SceneContent {
     int contentType;
 
     @ColumnInfo(name = "content")
-    int content;
+    String content;
 
     @ColumnInfo(name = "content_rank")
     int contentRank;
@@ -25,13 +25,17 @@ public class SceneContent {
     @ColumnInfo(name = "date_time")
     String dateTime;
 
-    public SceneContent(int id, int sceneId, int contentType, int content, int contentRank, String dateTime) {
+    public SceneContent(int id, int sceneId, int contentType, String content, int contentRank, String dateTime) {
         this.id = id;
         this.sceneId = sceneId;
         this.contentType = contentType;
         this.content = content;
         this.contentRank = contentRank;
         this.dateTime = dateTime;
+    }
+
+    @Ignore
+    public SceneContent() {
     }
 
     public int getId() {
@@ -58,11 +62,11 @@ public class SceneContent {
         this.contentType = contentType;
     }
 
-    public int getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(int content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

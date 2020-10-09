@@ -26,7 +26,7 @@ public interface SceneContentDao {
     @Query("SELECT * FROM scene_contents ORDER BY id DESC LIMIT 1")
     public List<SceneContent> getLastInsertedSceneContent();
 
-    @Query("SELECT * FROM scene_contents WHERE id = :sceneContentId")
-    public List<SceneContent> getSceneContent(int sceneContentId);
+    @Query("SELECT * FROM scene_contents WHERE scene_id = :sceneId")
+    public List<SceneContent> getSceneContent(int sceneId);
 }
 

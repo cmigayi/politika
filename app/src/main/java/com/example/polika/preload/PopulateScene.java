@@ -19,7 +19,7 @@ public class PopulateScene {
         initScenes();
     }
 
-    public void initScenes(){
+    private void initScenes(){
         sceneList = new ArrayList<>();
 
         Scene scene = new Scene(0, "Scene1", 1, null);

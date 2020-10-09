@@ -1,11 +1,13 @@
 package com.example.polika;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.polika.adapters.CustomPlayerAdapter;
 import com.example.polika.adapters.CustomSceneAdapter;
 import com.example.polika.data.Player;
 import com.example.polika.data.Scene;
+import com.example.polika.data.SceneContent;
 import com.example.polika.localDatabases.SceneLocalDb;
 import com.example.polika.localProfiles.PlayerLocalProfile;
 import com.example.polika.presenters.SceneActivityPresenter;
@@ -90,6 +92,7 @@ public class SceneActivity extends AppCompatActivity implements SceneActivityVie
 
     @Override
     public void onSceneListenerClick(int position) {
-
+        Intent intent = new Intent(SceneActivity.this, SceneContentActivity.class);
+        startActivity(intent);
     }
 }

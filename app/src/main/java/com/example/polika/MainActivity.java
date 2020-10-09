@@ -6,9 +6,11 @@ import android.os.Bundle;
 import com.example.polika.adapters.CustomPlayerAdapter;
 import com.example.polika.data.Player;
 import com.example.polika.localDatabases.PlayerLocalDb;
+import com.example.polika.localDatabases.SceneContentLocalDb;
 import com.example.polika.localDatabases.SceneLocalDb;
 import com.example.polika.localProfiles.PlayerLocalProfile;
 import com.example.polika.preload.PopulateScene;
+import com.example.polika.preload.PopulateSceneContent;
 import com.example.polika.presenters.MainActivityPresenter;
 import com.example.polika.views.MainActivityView;
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         playerLocalProfile = new PlayerLocalProfile(this);
 
         new PopulateScene(new SceneLocalDb(this)).insertData();
+        new PopulateSceneContent(new SceneContentLocalDb(this)).insertData();
 
         PlayerLocalDb playerLocalDb = new PlayerLocalDb(this);
         presenter = new MainActivityPresenter(playerLocalDb, this);
